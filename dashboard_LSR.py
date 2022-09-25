@@ -12,11 +12,13 @@ import statistics
 import panel as pn
 import matplotlib.pyplot as plt
 import plotly.express  as px
+import os
 from dash import Dash, html, dcc, Input, Output
 
 
 pn.extension('tabulator', sizing_mode="stretch_width")
 
+list_of_sets = os.listdir('C:/Users/rod_c/Documents/Python/LSR/Data') 
 expansion = 'DMU'
 
 stx_df = pd.read_json('C:/Users/rod_c/Documents/Python/Datos/' + expansion + '.json') #Se lee el archivo JSON de 
