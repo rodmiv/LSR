@@ -174,7 +174,7 @@ def set_cards(set_code):
             
 
         cursor.execute(f'''
-                            INSERT INTO xln VALUES (
+                            INSERT INTO {set_code} VALUES (
                                 '{card['id']}',
                                 '{card['oracle_id']}',
                                 "{card['name'].replace('"','').replace("'",'')}",
