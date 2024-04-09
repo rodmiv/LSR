@@ -1,11 +1,18 @@
 from dash import Output, Input, dcc, html
 import dash_bootstrap_components as dbc
 import sqlite3
-import requests
+from dash.exceptions import PreventUpdate
 import json
 
+### Set Options ###
+connection = sqlite3.connect('./Data/LSRDB.db')
+cursor = connection.cursor()
+cursor.execute('SELECT name ,code  FROM mtgSets')
+fetched = cursor.fetchall()
+sets_dict = dict(fetched)
+sets = [x[0] for x in fetched]
+
 ### Locals ###
-from Components.NavBar import sets_dict
 from utils.sets import set_cards
 
 def get_callbacks(app):
@@ -21,9 +28,13 @@ def get_callbacks(app):
     )
 
     def selected_set_process(selected_set):
-        code = sets_dict[selected_set]
 
-        set_cards(code)
+        if selected_set==None:
+            raise PreventUpdate
+        else:
+            code = sets_dict[selected_set]
 
-        return dict(hidden = None)
+            set_cards(code)
+
+            return dict(hidden = None)
 

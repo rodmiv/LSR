@@ -14,14 +14,14 @@ def sets_list():
     connection = sqlite3.connect('./Data/LSRDB.db')
     cursor = connection.cursor()
 
-    cursor.execute('SELECT scryfall_id FROM mtgSets')
-    fetched = cursor.fetchall()
-    ids = [x[0] for x in fetched]
+    # cursor.execute('SELECT scryfall_id FROM mtgSets')
+    # fetched = cursor.fetchall()
+    # ids = [x[0] for x in fetched]
 
     for set in response['data']:
-        if set['set_type'] == 'expansion' and set["id"] not in ids:
+        if set['set_type'] == 'expansion':
             cursor.execute(f'''
-                                INSERT INTO mtgSets VALUES (
+                                INSERT OR IGNORE INTO mtgSets VALUES (
                                     "{str(set["id"])}",
                                     "{set["code"]}",
                                     "{set["name"]}",
@@ -30,7 +30,7 @@ def sets_list():
                                     {set["card_count"]}
                                     )
                             ''')
-            print(f'inserted {set["name"]} into sets list table')
+            # print(f'inserted {set["name"]} into sets list table')
     
     connection.commit()
 
@@ -85,7 +85,8 @@ def set_cards(set_code):
                     set_name TEXT,
                     collector_number,
                     rarity TEXT,
-                    booster BOOLEAN
+                    booster BOOLEAN,
+                    UNIQUE(scryfall_id,oracle_id)
                )
                ''')
     
@@ -174,7 +175,7 @@ def set_cards(set_code):
             
 
         cursor.execute(f'''
-                            INSERT INTO {set_code} VALUES (
+                            INSERT OR IGNORE INTO {set_code} VALUES (
                                 '{card['id']}',
                                 '{card['oracle_id']}',
                                 "{card['name'].replace('"','').replace("'",'')}",

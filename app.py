@@ -4,9 +4,10 @@ import dash_bootstrap_components as dbc
 from pathlib import Path
 from utils.utilities import next_free_port
 from utils.sets import set_cards
+import sqlite3
 
 ### Locals ###
-# from callbacks import get_callbacks
+from callbacks import get_callbacks, sets
 
 ### Initialize the APP ###
 app = Dash(__name__, external_stylesheets=[dbc.themes.SANDSTONE], use_pages=True)
@@ -20,11 +21,13 @@ app.layout = html.Div(
                             dbc.Row(children=[
                                 dbc.Col(children=[
                                     html.Div(
-                                        dbc.NavbarBrand("Limited Set Review V0.1", className="brand")
+                                        dbc.NavbarBrand("Limited Set Reviewer V0.1", className="brand")
                                     ),
-                                ],class_name='col-4', width={'offset': 2}),
-                                dbc.Col(children=[
-                                    #  dcc.Dropdown(options=sets,placeholder='Select a Set',className='set-selector',id='set_selection')
+                                ],class_name='col-3', width={'offset': 1}),
+                                dbc.Col(
+                                    dcc.Dropdown(options=sets,placeholder='Select a Set',className='vw-70',id='set_selection')
+                                ,class_name='col-4'),
+                                dbc.Col(children=[                                     
                                     dbc.DropdownMenu(
                                         label='Menu',
                                         children=[
@@ -32,7 +35,8 @@ app.layout = html.Div(
                                             for page in dash.page_registry.values()
                                         ]
                                     , size='lg')
-                                ],class_name='col-4'),
+                                ],class_name='col-3'),
+                                html.Div(id='hidden-div', style={'display':'none'})
                             ],class_name='w-100 mx-auto gx-5 text-center'),        
                         ],    
                         color='primary',
@@ -48,7 +52,7 @@ app.layout = html.Div(
 
 ### Callbacks ###
 
-# get_callbacks(app)
+get_callbacks(app)
 
 ### Options ###
 
