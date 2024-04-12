@@ -1,0 +1,13 @@
+.footer-text{
+    color: grey;
+    font-size: 0.75rem;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 20px 5px;
+}
+
+.check-list{
+    max-width: 375px;
+}

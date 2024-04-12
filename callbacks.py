@@ -10,7 +10,18 @@ cursor = connection.cursor()
 cursor.execute('SELECT name ,code  FROM mtgSets')
 fetched = cursor.fetchall()
 sets_dict = dict(fetched)
-sets = [x[0] for x in fetched]
+sets = [
+    {
+        'label': html.Span(
+            children=[
+                html.Img(src=f'./assets/images/sets_icons/{sets_dict[x[0]]}.svg', height=20,width=20),
+                html.Span(f'{x[0]}', style={'font-size': 15, 'padding-left': 10})
+            ], style={'align-items': 'center', 'justify-content': 'center'}
+        ),
+        "value": x[0],
+    }
+    for x in fetched
+]
 
 ### Locals ###
 from utils.sets import set_cards

@@ -30,7 +30,12 @@ def sets_list():
                                     {set["card_count"]}
                                     )
                             ''')
-            # print(f'inserted {set["name"]} into sets list table')
+            
+            ### Save Set Icon ###
+            icon_res = requests.get(set['icon_svg_uri'])
+
+            with open(f'./assets/images/sets_icons/{set["code"]}.svg', 'w') as file:
+                file.write(icon_res.text)
     
     connection.commit()
 

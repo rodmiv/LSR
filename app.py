@@ -8,6 +8,7 @@ import sqlite3
 
 ### Locals ###
 from callbacks import get_callbacks, sets
+from Components.Footer import footer
 
 ### Initialize the APP ###
 app = Dash(__name__, external_stylesheets=[dbc.themes.SANDSTONE], use_pages=True)
@@ -45,8 +46,10 @@ app.layout = html.Div(
                     
                     html.Div(
                         dash.page_container,
-                        className='m-5'
+                        # className='m-5'
                     ),
+
+                    footer
                 ]
             )
 
