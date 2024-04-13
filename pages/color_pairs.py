@@ -9,5 +9,6 @@ dash.register_page(
 )
 
 layout = html.Div(children=[
-    html.H1('Color Pairs')
+    html.H1('Color Pairs',className='text-center'),
+    
 ])
