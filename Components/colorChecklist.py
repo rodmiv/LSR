@@ -5,7 +5,7 @@ import dash_mantine_components as dmc
 def color_checklist(clid, cn):
     return dbc.Card(
         dmc.CheckboxGroup(
-            orientation='horizontal',
+            #orientation='horizontal',
             id=clid,
             children=[
                 dmc.Checkbox(label='U',value='u',color='blue'),

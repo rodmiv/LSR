@@ -21,12 +21,14 @@ layout = html.Div(
                         html.Br(),
                         html.Table([
                             html.Tr([html.Td('Set Code:'), html.Td('NSS', id='set_code')]),
-                            html.Tr([html.Td('Card Count:'), html.Td('NSS', id='set_ccount')]),
-                            html.Tr([html.Td('Creature Count:'), html.Td('NSS', id='creature_Count')]),
+                            html.Tr([html.Td('Card Count:'), html.Td('NSS', id='set_count')]),
+                            html.Tr([html.Td('Creature Count:'), html.Td('NSS', id='creature_count')]),
                             html.Tr([html.Td('Sorcery Count:'), html.Td('NSS', id='sorcery_count')]),
                             html.Tr([html.Td('Instant Count:'), html.Td('NSS', id='instant_count')]),
                             html.Tr([html.Td('Enchantment Count:'), html.Td('NSS', id='ench_count')]),
+                            html.Tr([html.Td('Artifact Count:'),html.Td('NSS',id='artifacts_count')]),
                             html.Tr([html.Td('Land Count:'), html.Td('NSS', id='land_count')]),
+                            html.Tr([html.Td('Planeswalkers:'), html.Td('NSS', id='planesw')]),
                             html.Tr([html.Td('Other Count:'), html.Td('NSS', id='other_count')]),
                         ]),
                     ]

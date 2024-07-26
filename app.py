@@ -3,7 +3,7 @@ from dash import Dash, html, dcc, Input, Output
 import dash_bootstrap_components as dbc
 from pathlib import Path
 from utils.utilities import next_free_port
-from utils.sets import set_cards
+from utils.sets import set_cards, sets_list
 import sqlite3
 
 ### Locals ###
@@ -52,6 +52,9 @@ app.layout = html.Div(
                     footer
                 ]
             )
+
+### Needed Before Callbacks ###
+
 
 ### Callbacks ###
 

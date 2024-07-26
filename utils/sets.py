@@ -2,10 +2,11 @@ import requests
 import json
 import sqlite3
 import numpy as np
-
+import os
 
 def sets_list():
 
+    print('Running Initial set retrieve')
     #Create a request to Scryfall-API for sets data 
     res  = requests.get('https://api.scryfall.com/sets')
     response = json.loads(res.text)
@@ -14,6 +15,9 @@ def sets_list():
     connection = sqlite3.connect('./Data/LSRDB.db')
     cursor = connection.cursor()
 
+    #check if doesnt mtgsets exists and creates it
+    cursor.execute("CREATE TABLE IF NOT EXISTS mtgSets (scryfall_id TEXT, code TEXT, name TEXT, released_at DATE, set_type TEXT, card_count INTEGER, UNIQUE(scryfall_id))")
+    
     # cursor.execute('SELECT scryfall_id FROM mtgSets')
     # fetched = cursor.fetchall()
     # ids = [x[0] for x in fetched]
@@ -32,12 +36,17 @@ def sets_list():
                             ''')
             
             ### Save Set Icon ###
-            icon_res = requests.get(set['icon_svg_uri'])
+            icon_path = f'./assets/images/sets_icons/{set["code"]}.svg'
 
-            with open(f'./assets/images/sets_icons/{set["code"]}.svg', 'w') as file:
-                file.write(icon_res.text)
+            if os.path.exists(icon_path):
+                continue
+            else:
+                icon_res = requests.get(set['icon_svg_uri'])
+                with open(f'./assets/images/sets_icons/{set["code"]}.svg', 'w') as file:
+                    file.write(icon_res.text)
     
     connection.commit()
+    connection.close()
 
 def set_cards(set_code):
     more_pages = False
@@ -211,3 +220,4 @@ def set_cards(set_code):
                         ''')
     
     connection.commit()
+    connection.close()

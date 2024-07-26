@@ -12,6 +12,7 @@ dash-bootstrap-components==1.5.0
 dash-core-components==2.0.0
 dash-html-components==2.0.0
 dash-table==5.0.0
+dash_mantine_components==0.14.3
 Flask==3.0.2
 fonttools==4.51.0
 idna==3.6
