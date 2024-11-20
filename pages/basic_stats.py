@@ -32,12 +32,12 @@ layout = html.Div(
                             html.Tr([html.Td('Other Count:'), html.Td('NSS', id='other_count')]),
                         ]),
                     ]
-                ,className='my-auto col-6'),
+                ,className='my-auto col-4'),
                 dbc.Col(
                     children=[
                         dcc.Graph(id='types_hist')
                     ],
-                    className='col-6'
+                    className='col-8'
                 ),
                 color_checklist(clid='general_color',cn='check-list text-center')
             ],

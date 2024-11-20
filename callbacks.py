@@ -4,6 +4,7 @@ import sqlite3
 from dash.exceptions import PreventUpdate
 import json
 import pandas as pd
+import plotly.express as px
 
 ### Locals ###
 from utils.sets import set_cards, sets_list
@@ -48,6 +49,7 @@ def get_callbacks(app):
             land_count = Output('land_count','children'),
             pw_count = Output('planesw','children'),
             other_count = Output('other_count','children'),
+            types_hist = Output('types_hist','figure'),
         ),
         inputs = dict(
             selected_set = Input('set_selection','value')
@@ -77,6 +79,14 @@ def get_callbacks(app):
             land_df = set_df[set_df['basic_type']=='land']
             pw_df = set_df[set_df['basic_type']=='planeswalker']
             other_df = set_df[set_df['basic_type']=='other']
+
+            counts = pd.DataFrame(set_df['basic_type'].value_counts()).reset_index()
+            print(counts)
+            hist_fig = px.histogram(
+                x=counts['basic_type'],
+                y=counts['count'],
+                labels=dict(x='Card Type',y='Count')
+                )
             return dict(
                 hidden = None,
                 set_code = code.upper(),
@@ -89,5 +99,6 @@ def get_callbacks(app):
                 land_count = land_df.shape[0],
                 pw_count = pw_df.shape[0],
                 other_count = other_df.shape[0],
+                types_hist = hist_fig
                 )
 
