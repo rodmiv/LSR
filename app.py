@@ -63,5 +63,9 @@ get_callbacks(app)
 ### Options ###
 
 ### Run APP ###
-user_port = next_free_port()
-app.run(debug=True, port=user_port)
+server = app.server
+# user_port = next_free_port()
+# app.run(
+#     debug=True,
+#      port=user_port
+#      )

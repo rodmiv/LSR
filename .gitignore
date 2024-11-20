@@ -1,6 +1,8 @@
-.venv/
+.env
 lsr/
 Data/*
 !Data/.gitkeep
 assets/images/sets_icons/*
 !assets/images/sets_icons/.gitkeep
+env/
+/tests.py
